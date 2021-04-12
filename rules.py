@@ -5,13 +5,13 @@ Copyright 2021 Schoening Consulting, LLC
 import re
 import datetime
 
-def clipl(s,n):
+def clipl(s, n):
     """
     Clip a string on the left to the n right-most characters 
     """
     return s[:n]
 
-def clipr(s,n):
+def clipr(s, n):
     """
     Clip a string on the right to the n right-most characters 
     """
@@ -28,11 +28,12 @@ def fpe(c, s):
     Return a format preserving encrypted value
     """
     # print(s,type(s)) 
-    if (not isinstance(s, str) or len(s) < 2):
-        # FF3-1 minLen is 2
+    if not isinstance(s, str) or len(s) < 2:
+        # Original FF3 minLen was 2
+        # TODO: compare c.minLen instead of constant, add test cases
         # raise ValueError(f'length {len(s)}, but fpe requires 3 or more')
         return "" 
-    a = re.sub("[^\d]", "", s)
+    a = re.sub(r"[^\d]", "", s)
     res = c.encrypt(a)
     return res
 
@@ -52,18 +53,17 @@ def redact(s):
     return ""
 
 zip_blacklist = ('03600', '05900', '06300', '10200', '20300', '55600', '69200', '79000',
-                 '82100', '82300', '83000', '83100', '87800', '87900', '88400', '89000', '89300' )
+                 '82100', '82300', '83000', '83100', '87800', '87900', '88400', '89000', '89300')
 
-def us_zip_code(zip: str) -> str:
+def us_zipcode(zipcode: str) -> str:
     """
     Return a five digit zipcode with the last two digits replaced by zeros.
     Input may be either a five digit or 9 digit zip+4
     """
-    if len(zip) not in (5,10):
-        raise ValueError(f'zipcode length was {len(zip)}, but valid zipcodes are 5 or 10 digits')
-    newz = zip[0:3] + '00'
+    if len(zipcode) not in (5, 10):
+        raise ValueError(f'zipcode length was {len(zipcode)}, but valid zipcodes are 5 or 10 digits')
+    newz = zipcode[0:3] + '00'
     if newz in zip_blacklist:
         return '00000'
     else:
         return newz
-        

@@ -1,5 +1,5 @@
 import unittest
-from rules import fpe, mask, mask_ssn, us_zip_code
+from rules import fpe, mask, mask_ssn, us_zipcode
 
 class TestMasking(unittest.TestCase):
     def test_mask(self):
@@ -14,10 +14,10 @@ class TestMasking(unittest.TestCase):
 class TestRules(unittest.TestCase):
 
     def test_zip_code(self):
-        self.assertEqual(us_zip_code('05900'), '00000')
-        self.assertEqual(us_zip_code('07739'), '07700')
-        self.assertEqual(us_zip_code('07739-1234'), '07700')
-        self.assertRaises(ValueError, us_zip_code, '077')
+        self.assertEqual(us_zipcode('05900'), '00000')
+        self.assertEqual(us_zipcode('07739'), '07700')
+        self.assertEqual(us_zipcode('07739-1234'), '07700')
+        self.assertRaises(ValueError, us_zipcode, '077')
 
 class TestGeneralizeDate(unittest.TestCase):
 
