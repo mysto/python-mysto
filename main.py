@@ -16,14 +16,14 @@ def display_df(dframe):
     print(dframe)
     dframe
 
-def load_csv(fname, dtype={}, date_types=[]):
+def local_load_csv(fname, dtype={}, date_types=[]):
     # turn off NA filter so that missing values don't become NaN
     # df=pd.read_csv('demo/CCSampleData.csv', dtype={"Zipcode": str}, parse_dates=dtypes, na_filter=False)
     print(date_types)
     df=pd.read_csv(fname, dtype={"Zipcode": str}, parse_dates=date_types, na_filter=False)
     return df
 
-# TODO: refactor global 
+# TODO: consider refactoring global
 date_types = []
 
 
@@ -99,9 +99,22 @@ def anonymize(df, rulelist):
     return df
 
 if __name__ == "__main__":
-    # TODO: read rules for csv data types
-    df=load_csv('../demo/CCSampleData.csv', {"Zipcode": str}, date_types=['Birth Date'])
-    # TODO: refactor into load rules and process data
-    out_df = anonymize(df)
-    display_df(df)
-    df.to_csv('../demo/CCSampleDataOut.csv')
+    df = pd.read_csv('../demo/CCSampleData.csv', dtype={"Zipcode": str}, parse_dates=['Birth Date'], na_filter=False)
+    # TODO: load rules from a .json file
+    rules = [
+        '{"column" : "Zipcode", "type" : "us_zipcode"}',
+        '{"column" : "Birth Date", "type" : "Generalize.Date", "format" : "5"}',
+
+        '{"column" : "First name", "type" : "clipl", "n" : "1"}',
+        '{"column" : "Last name", "type" : "clipl", "n" : "3"}',
+        '{"column" : "Acct num", "type" : "Mask", "format" : "5"}',
+
+        '{"column" : "SSN", "type" : "FF3", "format" : "000-00-0000", "sep" : "-"}',
+        '{"column" : "Canadian SIN", "type" : "FF3", "format" : "000-000-000"}',
+        '{"column" : "Acct num", "type" : "Mask", "format" : "5"}'
+    ]
+
+    initialize_fpe("EF4359D8D580AA4F7F036D6F04FC6A94", "D8E7920AFA330A73")
+    out_df = anonymize(df, rules)
+    display_df(out_df)
+    out_df.to_csv('../demo/CCSampleDataOut.csv')
