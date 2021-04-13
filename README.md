@@ -1,5 +1,5 @@
 
-# mysto - Data Anonymiztion in Python
+# mysto - Data Anonymization in Python
 
 
 ## Requires
@@ -39,7 +39,7 @@ To run unit tests on this implementation:
 
   1. `python3 core_test.py`
 
-## Algorithum Notes
+## Algorithm Notes
 
 
 ## Implementation Notes

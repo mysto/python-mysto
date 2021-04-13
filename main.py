@@ -7,14 +7,14 @@ import pandas as pd
 from collections import namedtuple
 import logging
 from ff3 import FF3Cipher
-from rules import clipl, date_generalize, fpe, redact, us_zip_code
+from rules import clipl, date_generalize, fpe, redact, us_zipcode
 
 # display data set on CLI
-def display_df(df):
+def display_df(dframe):
     pd.set_option("display.max_columns", 12)
     pd.set_option("display.width", 120)
-    print(df)
-    df
+    print(dframe)
+    dframe
 
 def load_csv(fname, dtype={}, date_types=[]):
     # turn off NA filter so that missing values don't become NaN
@@ -40,7 +40,7 @@ def old_anonymize(df):
     deid = [
         '{"column" : "First name", "type" : "clipl", "n" : "1"}',
         '{"column" : "Last name", "type" : "clipl", "n" : "3"}',
-        '{"column" : "Zipcode", "type" : "us_zip_code"}',
+        '{"column" : "Zipcode", "type" : "us_zipcode"}',
         '{"column" : "SSN", "type" : "FF3", "format" : "000-00-0000", "sep" : "-"}',
         '{"column" : "Canadian SIN", "type" : "FF3", "format" : "000-000-000"}',
         '{"column" : "Employee ID", "type" : "redact"}',
@@ -64,8 +64,8 @@ def build_rules(rules):
         elif x.type == "Mask":
             width = int(x.format)
             obj = lambda s: len(s[:-width])*"#"+s[-width:]
-        elif x.type == "us_zip_code":
-            obj = lambda s: us_zip_code(s)
+        elif x.type == "us_zipcode":
+            obj = lambda s: us_zipcode(s)
         elif x.type == "clipl":
             lm = lambda n: lambda s: clipl(s,int(n))
             obj = lm(x.n)
