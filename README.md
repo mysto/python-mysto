@@ -21,17 +21,18 @@ tbd
 
 ## Code Example
 
-The example code below can help you get started.
+The code example below can help you get started:
 
-Using default domain [0-9]
 ```python3
+import pandas as pd
+from datetime import date
+import main 
 
-import main
-df=main.load_csv('demo/CCSampleData.csv', {"Zipcode": str}, date_types=['Birth Date'])
-df
-out_df = main.anonymize(df)
-out_df
-
+d = {'SSN': ['938-49-5100', '976-52-7639'], 'date': [date(1994,2,22), date(2000,10,10)]}
+df = pd.DataFrame(data=d)
+rules = [ '{"column" : "SSN", "type" : "Mask", "format" : "5" }',  '{"column" : "date", "type" : "Generalize.Date"}' ]
+out_df = main.anonymize(df, rules)
+print(out_df)
 ```
 ## Testing
 
