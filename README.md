@@ -13,7 +13,7 @@ This project was built and tested with Python 3.6 and later versions.  It requir
 
 Install this project with pip:
 
-`pip3 install core`
+`pip3 install mysto`
 
 ## Usage
 
@@ -39,9 +39,6 @@ print(out_df)
 To run unit tests on this implementation:
 
   1. `python3 core_test.py`
-
-## Algorithm Notes
-
 
 ## Implementation Notes
 
