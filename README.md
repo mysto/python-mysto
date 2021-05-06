@@ -38,7 +38,7 @@ print(out_df)
 
 To run unit tests on this implementation:
 
-  1. `python3 core_test.py`
+  1. `python3 rules_test.py`
 
 ## Implementation Notes
 
