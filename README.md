@@ -17,7 +17,11 @@ Install this project with pip:
 
 ## Usage
 
-tbd
+The Mysto toolkit provides an integrated de-identification solution, including:
+* Date generalization
+* Format-preserving encryption (FPE) for alphanumerics
+* Masking, including customized rules for US SSN  
+* HIPAA compliant date and zip code rules
 
 ## Code Example
 
