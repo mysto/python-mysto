@@ -20,7 +20,7 @@ As a first step, load the sample CSV file. We use the Pandas CSV reader
 which provides excellent handling of data types, especially dates.
 
 ```
-df=main.load_csv('../demo/CCSampleData.csv', {"Zipcode": str}, date_types=['Birth Date'])
+df=main.load_csv('https://raw.githubusercontent.com/mysto/python-mysto/main/samples/CCSampleData.csv', {"Zipcode": str}, date_types=['Birth Date'])
 ```
 
 1. Define HIPAA rules for generalizing zipcode and birth date colums
