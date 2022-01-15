@@ -1,3 +1,6 @@
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Downloads](https://pepy.tech/badge/mysto)](https://pepy.tech/project/mysto)
+[![PyPI version](https://badge.fury.io/py/mysto.svg)](https://badge.fury.io/py/mysto)
 
 # mysto - Data Anonymization in Python
 
@@ -38,6 +41,8 @@ rules = [ '{"column" : "SSN", "type" : "Mask", "format" : "5" }',  '{"column" : 
 out_df = main.anonymize(df, rules)
 print(out_df)
 ```
+
+
 ## Testing
 
 To run unit tests on this implementation:
